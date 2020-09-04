@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <title>My site!</title>
-        <style type="text/css">
-            h1 {
-                color: pink;
-            }
-        </style>
+        <meta charset="utf-8">
+        <title>Car Plates Region</title>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelector('form').onsubmit = function () {
+                    fetch('https://raw.githubusercontent.com/ktv-sky/ktv-sky.github.io/master/car_plates.json')
+                    .then(response => response.json())
+                    .then(data => {
+
+                        const code = document.querySelector('#code').value;
+
+                        const region = data[code];
+
+                        if (region !== undefined) {
+                            document.querySelector('#result').innerHTML = `${code} - ${region}`;
+                        }
+                        else {
+                            document.querySelector('#result').innerHTML = 'Нет такого кода!';
+                        }
+                    })
+                    .catch(error => {
+                        console.log('Error:', error);
+                    });
+                    return false;
+                }
+            });
+
+        </script>
     </head>
     <body>
-        <h1>This is my GitHub Pages website!</h1>
+        <form>
+            <input id="code" placeholder="Код региона" type="text">
+            <input type="submit" value="GO">
+        </form>
+        <p>
+            <div id="result"></div>
+        </p>
     </body>
 </html>
