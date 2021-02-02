@@ -42,3 +42,7 @@ h1 {
 .countdown-el span {
     font-size: 1.5rem;
 }
+
+.seconds-c {
+    width: 190px;
+}
